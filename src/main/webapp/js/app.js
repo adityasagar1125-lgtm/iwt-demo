@@ -470,7 +470,7 @@ async function initAdminPage() {
     const recent = events.slice(0, 12);
     adminEventList.innerHTML = recent.map(e => `
       <tr>
-        <td>${e.title || ''}</td>
+        <td><a class="view-all" href="event-detail.html?id=${e.id}">${e.title || ''}</a></td>
         <td>${e.clubName || ''}</td>
         <td>${e.eventDate || ''} ${e.eventTime || ''}</td>
         <td>${e.status || 'upcoming'}</td>
