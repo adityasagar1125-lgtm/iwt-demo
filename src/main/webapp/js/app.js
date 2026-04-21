@@ -694,8 +694,11 @@ function updateNavForSession() {
   });
   const roleEls = document.querySelectorAll('[data-role]');
   roleEls.forEach(el => {
-    const role = el.getAttribute('data-role');
-    el.style.display = user && user.role === role ? '' : 'none';
+    const roles = (el.getAttribute('data-role') || '')
+      .split(',')
+      .map(r => r.trim())
+      .filter(Boolean);
+    el.style.display = user && roles.includes(user.role) ? '' : 'none';
   });
 }
 
