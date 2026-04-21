@@ -1,0 +1,15 @@
+# Maven build output
+/target/
+
+# Local Tomcat runtime and logs
+/.local/
+
+# IDE files
+/.vscode/
+/.settings/
+/.project
+/.classpath
+
+# OS files
+.DS_Store
+Thumbs.db

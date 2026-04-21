@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCMS - College Club Management System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="index">
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark">CC</div>
+      <div class="brand-text">
+        <span class="brand-name">College Club Management System</span>
+        <span class="brand-sub">Campus Clubs and Events Hub</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="clubs.html">Clubs</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="dashboard.html" data-auth="only">Dashboard</a></li>
+      <li><a href="admin.html" data-role="super_admin">Admin</a></li>
+      <li><a href="login.html" data-auth="guest">Login</a></li>
+      <li><a href="register.html" data-auth="guest">Register</a></li>
+      <li><a href="#" data-action="logout" data-auth="only">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge"><span>Campus Collaboration Platform</span></div>
+      <h1>Manage Clubs, Members, Events,<br/>and Announcements</h1>
+      <p>CCMS provides a central digital hub for students, club administrators, and faculty coordinators.</p>
+      <div class="inline-actions" style="justify-content:center;">
+        <a href="clubs.html" class="btn btn-primary" style="text-decoration:none;">Explore Clubs</a>
+        <a href="events.html" class="btn btn-secondary" style="text-decoration:none;">View Events</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="totalEvents">0</span><span class="stat-label">Upcoming Events</span></div>
+      </div>
+      <p id="pageMessage" class="muted"></p>
+    </div>
+  </section>
+
+  <section class="page-wrap">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">Featured <span>Clubs</span></h2></div>
+      <div class="clubs-grid" id="clubsGrid"></div>
+    </div>
+  </section>
+
+  <section class="page-wrap" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">Upcoming <span>Events</span></h2></div>
+      <div class="events-grid" id="eventsGrid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container"><p><strong>CCMS</strong><br/>College Club Management System</p></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clubs - CCMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="clubs">
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark">CC</div>
+      <div class="brand-text"><span class="brand-name">CCMS</span><span class="brand-sub">Club Discovery</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clubs.html" class="active">Clubs</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="dashboard.html" data-auth="only">Dashboard</a></li>
+      <li><a href="login.html" data-auth="guest">Login</a></li>
+      <li><a href="#" data-action="logout" data-auth="only">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-wrap">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">All <span>Clubs</span></h2></div>
+      <div class="grid-2" style="margin-bottom:16px;">
+        <input id="searchClub" type="text" placeholder="Search club by name or description" class="form-grid input" style="padding:10px;border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,0.03);color:var(--text-white);" />
+        <select id="categoryFilter" style="padding:10px;border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,0.03);color:var(--text-white);"></select>
+      </div>
+      <p id="pageMessage" class="muted"></p>
+      <div class="clubs-grid" id="clubsGrid"></div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

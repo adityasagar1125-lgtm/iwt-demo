@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - CCMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="login">
+  <section class="auth-shell">
+    <article class="auth-card">
+      <h1 class="auth-title">Student Login</h1>
+      <p class="muted">Access your club dashboard, memberships, and events.</p>
+      <form id="loginForm" class="form-grid">
+        <label>Email
+          <input type="email" name="email" required />
+        </label>
+        <label>Password
+          <input type="password" name="password" required />
+        </label>
+        <button class="btn btn-primary" type="submit">Login</button>
+      </form>
+      <p id="authMessage" class="muted" style="margin-top:10px;"></p>
+      <p class="muted" style="margin-top:12px;">New student? <a href="register.html" class="view-all">Create account</a></p>
+    </article>
+  </section>
+  <script src="js/app.js"></script>
+</body>
+</html>

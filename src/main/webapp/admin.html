@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - CCMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="admin">
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark">CC</div>
+      <div class="brand-text">
+        <span class="brand-name">College Club Management System</span>
+        <span class="brand-sub">Admin Dashboard</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+      <li><a href="clubs.html">Clubs</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="#" data-action="logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-wrap">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">System <span>Overview</span></h2>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:18px;">
+        <div class="kpi"><div class="muted">Clubs</div><div id="adminClubs" class="kpi-value">0</div></div>
+        <div class="kpi"><div class="muted">Memberships</div><div id="adminMembers" class="kpi-value">0</div></div>
+        <div class="kpi"><div class="muted">Events</div><div id="adminEvents" class="kpi-value">0</div></div>
+        <div class="kpi"><div class="muted">Users</div><div id="adminUsers" class="kpi-value">0</div></div>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Club Summary</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Club</th><th>Category</th><th>Members</th><th>Status</th></tr></thead>
+              <tbody id="adminClubList"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h3>Post Announcement</h3>
+          <form id="announcementForm" class="form-grid">
+            <label>Club
+              <select id="clubSelect" name="clubId" required></select>
+            </label>
+            <label>Title
+              <input type="text" name="title" required />
+            </label>
+            <label>Message
+              <textarea name="body" rows="4" required></textarea>
+            </label>
+            <label>Priority
+              <select name="priority">
+                <option value="high">high</option>
+                <option value="normal" selected>normal</option>
+                <option value="low">low</option>
+              </select>
+            </label>
+            <button class="btn btn-primary" type="submit">Publish</button>
+          </form>
+          <p id="adminMessage" class="muted" style="margin-top:10px;"></p>
+        </article>
+      </div>
+
+      <article id="pendingSection" class="panel" style="margin-top:18px; display:none;">
+        <h3>Pending Club Approvals</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Club</th><th>Category</th><th>Members</th><th>Action</th></tr></thead>
+            <tbody id="pendingClubList"></tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

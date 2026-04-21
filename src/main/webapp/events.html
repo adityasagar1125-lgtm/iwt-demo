@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events - CCMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="events">
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark">CC</div>
+      <div class="brand-text"><span class="brand-name">CCMS</span><span class="brand-sub">Event Calendar</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clubs.html">Clubs</a></li>
+      <li><a href="events.html" class="active">Events</a></li>
+      <li><a href="dashboard.html" data-auth="only">Dashboard</a></li>
+      <li><a href="login.html" data-auth="guest">Login</a></li>
+      <li><a href="#" data-action="logout" data-auth="only">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-wrap">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">All <span>Events</span></h2></div>
+      <div class="filter-bar">
+        <select id="statusFilter" style="padding:10px;border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,0.03);color:var(--text-white);">
+          <option value="all">All Status</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="ongoing">Ongoing</option>
+          <option value="past">Past</option>
+        </select>
+      </div>
+      <p id="resultsCount" class="muted"></p>
+      <p id="pageMessage" class="muted"></p>
+      <div class="events-grid" id="eventsGrid"></div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

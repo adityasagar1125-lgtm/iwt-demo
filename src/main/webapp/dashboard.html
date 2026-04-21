@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - CCMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="dashboard">
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark">CC</div>
+      <div class="brand-text">
+        <span class="brand-name">College Club Management System</span>
+        <span class="brand-sub">Student Dashboard</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="clubs.html">Clubs</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="admin.html" data-role="super_admin">Admin</a></li>
+      <li><a href="#" data-action="logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-wrap">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Welcome, <span id="welcomeName">Student</span></h2>
+      </div>
+
+      <div class="grid-3" style="margin-bottom:18px;">
+        <article class="kpi"><div class="muted">Available Clubs</div><div id="kpiClubs" class="kpi-value">0</div></article>
+        <article class="kpi"><div class="muted">Total Events</div><div id="kpiEvents" class="kpi-value">0</div></article>
+        <article class="kpi"><div class="muted">Announcements</div><div id="kpiAnnouncements" class="kpi-value">0</div></article>
+      </div>
+
+      <article class="panel">
+        <h3>Announcements Feed</h3>
+        <div id="announcementFeed"></div>
+      </article>
+
+      <p id="pageMessage" class="muted" style="margin-top:12px;"></p>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
