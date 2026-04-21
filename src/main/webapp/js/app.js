@@ -88,6 +88,19 @@ async function registerEvent(userId, eventId) {
   });
 }
 
+async function createEvent(payload) {
+  return request('/api/events', {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+}
+
+async function deleteEvent(eventId, userId) {
+  return request(`/api/events?id=${eventId}&userId=${userId}`, {
+    method: 'DELETE'
+  });
+}
+
 async function fetchAnnouncements(clubId) {
   const q = clubId ? `?clubId=${clubId}` : '';
   const data = await request(`/api/announcements${q}`);
@@ -443,7 +456,70 @@ async function initAdminPage() {
 
   const announceForm = document.getElementById('announcementForm');
   const clubSelect = document.getElementById('clubSelect');
+  const eventForm = document.getElementById('eventForm');
+  const eventClubSelect = document.getElementById('eventClubSelect');
+  const adminEventList = document.getElementById('adminEventList');
   clubSelect.innerHTML = clubs.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  if (eventClubSelect) {
+    eventClubSelect.innerHTML = clubs.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  }
+
+  async function renderAdminEvents() {
+    if (!adminEventList) return;
+    const events = await fetchEvents();
+    const recent = events.slice(0, 12);
+    adminEventList.innerHTML = recent.map(e => `
+      <tr>
+        <td>${e.title || ''}</td>
+        <td>${e.clubName || ''}</td>
+        <td>${e.eventDate || ''} ${e.eventTime || ''}</td>
+        <td>${e.status || 'upcoming'}</td>
+        <td>
+          <button class="action-btn" data-action="delete-event" data-event-id="${e.id}">Delete</button>
+        </td>
+      </tr>
+    `).join('') || '<tr><td colspan="5" class="muted">No events yet.</td></tr>';
+  }
+
+  await renderAdminEvents();
+
+  adminEventList?.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-action="delete-event"]');
+    if (!btn) return;
+    try {
+      await deleteEvent(Number(btn.dataset.eventId), user.userId);
+      setMessage('adminMessage', 'Event deleted.', true);
+      await renderAdminEvents();
+    } catch (err) {
+      setMessage('adminMessage', err.message);
+    }
+  });
+
+  eventForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(eventForm);
+    try {
+      await createEvent({
+        userId: user.userId,
+        clubId: Number(fd.get('clubId')),
+        title: String(fd.get('title') || '').trim(),
+        description: String(fd.get('description') || '').trim(),
+        eventDate: String(fd.get('eventDate') || '').trim(),
+        eventTime: String(fd.get('eventTime') || '').trim(),
+        venue: String(fd.get('venue') || '').trim(),
+        maxSeats: Number(fd.get('maxSeats') || 100),
+        status: String(fd.get('status') || 'upcoming').trim()
+      });
+      eventForm.reset();
+      if (eventClubSelect && clubs.length > 0) {
+        eventClubSelect.value = String(clubs[0].id);
+      }
+      setMessage('adminMessage', 'Event created successfully.', true);
+      await renderAdminEvents();
+    } catch (err) {
+      setMessage('adminMessage', err.message);
+    }
+  });
 
   if (user.role === 'super_admin') {
     const pending = await fetchPendingClubs(user.userId);

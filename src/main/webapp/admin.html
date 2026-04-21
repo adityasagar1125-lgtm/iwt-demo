@@ -73,6 +73,51 @@
         </article>
       </div>
 
+      <article class="panel" style="margin-top:18px;">
+        <h3>Create Event</h3>
+        <form id="eventForm" class="form-grid">
+          <label>Club
+            <select id="eventClubSelect" name="clubId" required></select>
+          </label>
+          <label>Title
+            <input type="text" name="title" required />
+          </label>
+          <label>Description
+            <textarea name="description" rows="3"></textarea>
+          </label>
+          <label>Date
+            <input type="date" name="eventDate" required />
+          </label>
+          <label>Time
+            <input type="time" name="eventTime" />
+          </label>
+          <label>Venue
+            <input type="text" name="venue" />
+          </label>
+          <label>Max Seats
+            <input type="number" name="maxSeats" min="1" value="100" />
+          </label>
+          <label>Status
+            <select name="status">
+              <option value="upcoming" selected>upcoming</option>
+              <option value="ongoing">ongoing</option>
+              <option value="past">past</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="submit">Create Event</button>
+        </form>
+      </article>
+
+      <article class="panel" style="margin-top:18px;">
+        <h3>Recent Events</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Club</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="adminEventList"></tbody>
+          </table>
+        </div>
+      </article>
+
       <article id="pendingSection" class="panel" style="margin-top:18px; display:none;">
         <h3>Pending Club Approvals</h3>
         <div class="table-wrap">

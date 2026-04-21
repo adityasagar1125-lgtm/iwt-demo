@@ -9,7 +9,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.silicon.dao.EventDAO;
+import com.silicon.dao.UserDAO;
 import com.silicon.model.Event;
+import com.silicon.model.User;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -97,6 +99,13 @@ public class EventServlet extends HttpServlet {
             return;
         }
 
+        int userId = body.optInt("userId", -1);
+        if (!isAdminUser(userId)) {
+            res.setStatus(403);
+            res.getWriter().write("{\"error\":\"Admin access required\"}");
+            return;
+        }
+
         int clubId = body.optInt("clubId", -1);
         String title = body.optString("title", "").trim();
         String eventDate = body.optString("eventDate", "").trim();
@@ -143,6 +152,13 @@ public class EventServlet extends HttpServlet {
             return;
         }
 
+        int userId = body.optInt("userId", -1);
+        if (!isAdminUser(userId)) {
+            res.setStatus(403);
+            res.getWriter().write("{\"error\":\"Admin access required\"}");
+            return;
+        }
+
         int id = body.optInt("id", -1);
         int clubId = body.optInt("clubId", -1);
         String title = body.optString("title", "").trim();
@@ -182,12 +198,28 @@ public class EventServlet extends HttpServlet {
         res.setCharacterEncoding("UTF-8");
 
         String idParam = req.getParameter("id");
+        String userIdParam = req.getParameter("userId");
         int id;
+        int userId;
         try {
             id = Integer.parseInt(idParam);
         } catch (NumberFormatException ex) {
             res.setStatus(400);
             res.getWriter().write("{\"error\":\"Valid id query parameter is required\"}");
+            return;
+        }
+
+        try {
+            userId = Integer.parseInt(userIdParam);
+        } catch (NumberFormatException ex) {
+            res.setStatus(400);
+            res.getWriter().write("{\"error\":\"Valid userId query parameter is required\"}");
+            return;
+        }
+
+        if (!isAdminUser(userId)) {
+            res.setStatus(403);
+            res.getWriter().write("{\"error\":\"Admin access required\"}");
             return;
         }
 
@@ -229,5 +261,17 @@ public class EventServlet extends HttpServlet {
         obj.put("remainingSeats", Math.max(0, e.getMaxSeats() - e.getRegisteredCount()));
         obj.put("status", e.getStatus());
         return obj;
+    }
+
+    private boolean isAdminUser(int userId) {
+        if (userId <= 0) {
+            return false;
+        }
+        User user = new UserDAO().getById(userId);
+        if (user == null) {
+            return false;
+        }
+        String role = user.getRole();
+        return "super_admin".equals(role) || "club_admin".equals(role);
     }
 }

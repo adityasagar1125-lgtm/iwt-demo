@@ -95,6 +95,11 @@ public class DBConnection {
                     "CONSTRAINT fk_events_club FOREIGN KEY (club_id) REFERENCES clubs(id) ON DELETE CASCADE" +
                     ")");
 
+                    // Backward-compatible migrations for older local DB files.
+                    st.execute("ALTER TABLE events ADD COLUMN IF NOT EXISTS image_url VARCHAR(255)");
+                    st.execute("ALTER TABLE events ADD COLUMN IF NOT EXISTS max_seats INT DEFAULT 100");
+                    st.execute("ALTER TABLE events ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'upcoming'");
+
             st.execute("CREATE TABLE IF NOT EXISTS memberships (" +
                     "membership_id INT AUTO_INCREMENT PRIMARY KEY," +
                     "user_id INT NOT NULL," +
